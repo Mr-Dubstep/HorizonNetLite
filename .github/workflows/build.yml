@@ -35,4 +35,5 @@
           --ks mykey.keystore --ks-pass pass:password \
           --out HorizonNetLite.apk \
           HorizonNetLite-unsigned.apk
+
           
