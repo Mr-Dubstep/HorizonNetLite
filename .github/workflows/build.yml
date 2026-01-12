@@ -25,6 +25,9 @@ jobs:
     - name: Install Android platform 33
       run: sdkmanager "platforms;android-33"
 
+      - name: Install Android build-tools
+      run: sdkmanager "build-tools;33.0.0"
+
     - name: Build APK
       run: |
         mkdir -p build/dex
