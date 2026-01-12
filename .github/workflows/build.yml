@@ -40,22 +40,16 @@ jobs:
         d8 ../../../build/com/horizonnet/lite/MainActivity.class \
            --output ../../../build/dex
 
-        aapt package -f -m -F ../../../build/HorizonNetLite-unsigned.apk \
+        $ANDROID_HOME/build-tools/33.0.0/aapt package -f -m -F ../../../build/HorizonNetLite-unsigned.apk \
           -M AndroidManifest.xml \
           -S res \
           -A assets \
           -I $ANDROID_HOME/platforms/android-33/android.jar
 
         cd ../../../build
-        aapt add HorizonNetLite-unsigned.apk dex/classes.dex
+        $ANDROID_HOME/build-tools/33.0.0/aapt add HorizonNetLite-unsigned.apk dex/classes.dex
 
-    - name: Sign APK
-      run: |
-        keytool -genkey -v -keystore mykey.keystore -storepass password \
-          -alias key -keypass password -dname "CN=Voltix,O=HorizonNet,C=DE" \
-          -keyalg RSA -keysize 2048 -validity 10000
-
-        apksigner sign --ks mykey.keystore --ks-pass pass:password \
+        $ANDROID_HOME/build-tools/33.0.0/apksigner sign --ks mykey.keystore --ks-pass pass:password \
           --out HorizonNetLite.apk HorizonNetLite-unsigned.apk
 
     - name: Upload APK
