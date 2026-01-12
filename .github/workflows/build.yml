@@ -31,6 +31,7 @@ jobs:
     - name: Build APK
       run: |
         mkdir -p build/dex
+        mkdir -p app/src/main/res
         cd app/src/main
 
         javac -classpath $ANDROID_HOME/platforms/android-33/android.jar \
@@ -45,16 +46,3 @@ jobs:
           -S res \
           -A assets \
           -I $ANDROID_HOME/platforms/android-33/android.jar
-
-        cd ../../../build
-        $ANDROID_HOME/build-tools/33.0.0/aapt add HorizonNetLite-unsigned.apk dex/classes.dex
-
-        $ANDROID_HOME/build-tools/33.0.0/apksigner sign --ks mykey.keystore --ks-pass pass:password \
-          --out HorizonNetLite.apk HorizonNetLite-unsigned.apk
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: HorizonNetLite
-        path: |
-          build/HorizonNetLite.apk
