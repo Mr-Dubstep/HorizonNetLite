@@ -27,7 +27,7 @@ jobs:
 
     - name: Build APK
       run: |
-        mkdir -p build
+        mkdir -p build/dex
         cd app/src/main
 
         javac -classpath $ANDROID_HOME/platforms/android-33/android.jar \
